@@ -1,0 +1,30 @@
+# Git
+.git
+.gitignore
+
+# Docker
+docker-compose.yml
+.dockerignore
+Dockerfile
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.pytest_cache/
+
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+build
+dist
+
+# Arquivos de ambiente locais
+.env
+*/.env
+**/.env
+
+# Arquivos de Sistema
+.DS_Store
+Thumbs.db
