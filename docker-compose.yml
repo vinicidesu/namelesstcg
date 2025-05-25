@@ -1,0 +1,32 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  user-service-db:
+    image: postgres:15-alpine
+    container_name: user-service-postgres
+    ports:
+      - "${USER_SERVICE_DB_PORT}:5432"
+    environment:
+      POSTGRES_USER: ${USER_SERVICE_DB_USER}
+      POSTGRES_PASSWORD: ${USER_SERVICE_DB_PASSWORD}
+      POSTGRES_DB: ${USER_SERVICE_DB_NAME}
+    volumes:
+      - user_service_data:/var/lib/postgresql/data
+    networks:
+      - tcg_network
+
+  user-service-api:
+    build: ./user_service
+    container_name: user-service-api
+    ports:
+      - "8001:80"
+    environment:
+      DATABASE_URL: "postgresql://${USER_SERVICE_DB_USER}:${USER_SERVICE_DB_PASSWORD}@${USER_SERVICE_DB_HOST}:${USER_SERVICE_DB_PORT}/${USER_SERVICE_DB_NAME}"
+    depends_on:
+      - user-service-db
+    networks:
+      - tcg_network
+
+# ... volumes e networks ...
