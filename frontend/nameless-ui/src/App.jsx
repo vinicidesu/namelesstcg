@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import UserList from './components/userList'; // 1. Importa o componente UserList
+// Se você tiver um arquivo CSS global para a aplicação, importe-o aqui
+// import './App.css'; 
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  // O retorno do App é o JSX que define a estrutura principal da sua aplicação
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+    <div className="App"> {/* Um container principal para a aplicação */}
+      
+      {/* Cabeçalho da Aplicação */}
+      <header className="App-header" style={{ backgroundColor: '#20232a', padding: '20px', color: 'white', textAlign: 'center' }}>
+        <h1>Meu Portal TCG</h1>
+      </header>
+
+      {/* Conteúdo Principal da Aplicação */}
+      <main style={{ padding: '20px', maxWidth: '900px', margin: '20px auto' }}>
+        <p style={{ marginBottom: '20px', textAlign: 'center' }}>
+          Bem-vindo! Explore os usuários cadastrados abaixo.
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+        
+        {/* 2. Renderiza o componente UserList aqui */}
+        <UserList />
+
+        {/* COMENTÁRIO PARA O FUTURO:
+          Quando sua aplicação crescer, esta seção <main> provavelmente
+          conterá um sistema de rotas (usando react-router-dom, por exemplo)
+          para exibir diferentes "páginas" ou componentes com base na URL.
+          Exemplo:
+          <Routes>
+            <Route path="/" element={<PaginaInicial />} />
+            <Route path="/usuarios" element={<UserList />} />
+            <Route path="/meus-decks" element={<MeusDecks />} />
+          </Routes>
+        */}
+      </main>
+
+      {/* Rodapé da Aplicação (Opcional) */}
+      <footer style={{ textAlign: 'center', padding: '20px', marginTop: '40px', borderTop: '1px solid #eee' }}>
+        <p>&copy; {new Date().getFullYear()} NamelessTCG. Todos os direitos reservados.</p>
+      </footer>
+
+    </div>
+  );
 }
 
-export default App
+// 3. Exporta o componente App para ser usado no index.js (ou main.jsx)
+export default App;
